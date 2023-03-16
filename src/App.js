@@ -1,12 +1,17 @@
-import React from "react";
+import { BrowserRouter } from 'react-router-dom';
+import AppRouter from 'components/AppRouter';
+import React from 'react';
 
-import "./App.css";
+import './index.scss';
+import MainContextProvider from 'contexts/MainContextProvider';
 
 const App = () => {
     return (
-        <div>
-            <h1>Hello World</h1>
-        </div>
+        <BrowserRouter>
+            <MainContextProvider>
+                <AppRouter />
+            </MainContextProvider>
+        </BrowserRouter>
     );
 };
 

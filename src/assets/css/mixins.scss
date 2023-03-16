@@ -1,0 +1,18 @@
+@mixin nunito($size: 1rem, $weight: 400) {
+    font-family: 'Nunito', sans-serif;
+    font-size: $size;
+    font-weight: $weight;
+}
+
+@mixin flex($fd: row, $jc: flex-start, $ai: 'normal') {
+    display: flex;
+    flex-direction: $fd;
+    justify-content: $jc;
+    align-items: $ai;
+}
+
+@mixin font($size: 1rem, $weight: 400, $height: normal) {
+    font-size: $size;
+    font-weight: $weight;
+    line-height: $height;
+}
