@@ -1,3 +1,5 @@
+@import 'assets/css/mixins.scss';
+
 .quizPage {
     width: 100%;
     height: 100vh;
@@ -9,5 +11,10 @@
         width: 90%;
         margin: auto;
         padding-top: 1em;
+
+        .infoBlockQuestionBoard {
+            @include flex(row, space-between);
+            margin-top: 1em;
+        }
     }
 }

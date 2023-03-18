@@ -1,3 +1,4 @@
+import InfoBlock from 'components/InfoBlock';
 import PlayersListTopBar from 'components/PlayersListTopBar';
 import React from 'react';
 
@@ -8,6 +9,9 @@ const QuizPage = () => {
         <div className={styles.quizPage}>
             <div className={styles.container}>
                 <PlayersListTopBar />
+                <div className={styles.infoBlockQuestionBoard}>
+                    <InfoBlock />
+                </div>
             </div>
         </div>
     );
