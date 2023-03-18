@@ -15,13 +15,13 @@ const players = [
         gender: 'female',
     },
     {
-        playerIcon: require('assets/images/male_2.png'),
-        playerName: 'Rena',
+        playerIcon: require('assets/images/male_4.png'),
+        playerName: 'Yzak',
         playerPoints: 0,
         gender: 'male',
     },
     {
-        playerIcon: require('assets/images/female_2.png'),
+        playerIcon: require('assets/images/female_3.png'),
         playerName: 'mina',
         playerPoints: 0,
         gender: 'female',
@@ -106,12 +106,15 @@ export const useMainContext = () => useContext(MainContext);
 
 const INIT_STATE = {
     players: [],
+    currentPlayer: null,
 };
 
 const reducer = (state = INIT_STATE, action) => {
     switch (action.type) {
         case MAIN_CONTEXT_ACTIONS.SET_PLAYERS:
             return { ...state, players: action.payload };
+        case MAIN_CONTEXT_ACTIONS.SET_PLAYER:
+            return { ...state, currentPlayer: action.payload };
 
         default:
             return state;
@@ -141,8 +144,31 @@ const MainContextProvider = ({ children }) => {
         }
     };
 
+    const setPlayer = player => {
+        sessionStorage.setItem('player', JSON.stringify(player));
+
+        dispatch({
+            type: MAIN_CONTEXT_ACTIONS.SET_PLAYER,
+            payload: player,
+        });
+    };
+
+    const getPlayer = () => {
+        const player = sessionStorage.getItem('player');
+
+        if (!player) return;
+
+        dispatch({
+            type: MAIN_CONTEXT_ACTIONS.SET_PLAYER,
+            payload: JSON.parse(player),
+        });
+    };
+
     const values = {
         players: state.players,
+        currentPlayer: state.currentPlayer,
+        getPlayer,
+        setPlayer,
     };
 
     return <MainContext.Provider value={values}>{children}</MainContext.Provider>;

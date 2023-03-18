@@ -16,3 +16,22 @@
     font-weight: $weight;
     line-height: $height;
 }
+
+@mixin player-name($size: 1rem, $weight: 600) {
+    span {
+        font-size: $size;
+        font-weight: $weight;
+
+        &.male {
+            color: $purple;
+        }
+
+        &.female {
+            color: $pink;
+        }
+
+        &.other {
+            color: $light-blue;
+        }
+    }
+}

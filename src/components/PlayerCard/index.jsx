@@ -1,11 +1,18 @@
+import PlayerIcon from 'components/PlayerIcon';
+import { useMainContext } from 'contexts/MainContextProvider';
+
 import styles from './styles.module.scss';
 
 const PlayerCard = ({ player }) => {
+    const { setPlayer } = useMainContext();
+
+    const chooseCurrentPlayer = () => {
+        setPlayer(player);
+    };
+
     return (
-        <div className={styles.playerCard}>
-            <div className={styles.playerIcon}>
-                <img src={player.playerIcon} alt="player" />
-            </div>
+        <div className={styles.playerCard} onClick={chooseCurrentPlayer}>
+            <PlayerIcon playerIcon={player.playerIcon} />
             <div className={styles.playerInfo}>
                 <p>
                     Игрок:{' '}
