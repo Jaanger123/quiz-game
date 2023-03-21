@@ -6,11 +6,16 @@ const ShowQuestion = () => {
 
     return (
         <div
-            className={`${styles.showQuestion} ${
+            className={`${styles.showQuestionWrapper} ${
                 currentQuestion ? styles.fullBoard : ''
             }`}
         >
-            <h2>{currentQuestion?.question}</h2>
+            <div className={styles.showQuestion}>
+                <h2>{currentQuestion?.question}</h2>
+                <div className={styles.questionButtons}>
+                    <button>Посмотреть ответ</button>
+                </div>
+            </div>
         </div>
     );
 };
