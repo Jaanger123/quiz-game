@@ -1,16 +1,26 @@
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import { useMainContext } from 'contexts/MainContextProvider';
+import RenderTime from 'components/RenderTime';
 import PlayerIcon from 'components/PlayerIcon';
-import { useEffect } from 'react';
 
 import styles from './styles.module.scss';
+import { FORMATS } from 'utils/consts';
 
 const InfoBlock = () => {
-    const { currentPlayer, getPlayer } = useMainContext();
+    const { currentPlayer } = useMainContext();
 
-    useEffect(() => {
-        getPlayer();
-    });
+    const formatTime = ({ remainingTime }) => {
+        const minutes = Math.floor(remainingTime / 60);
+        const seconds = remainingTime % 60;
+
+        // return `${minutes}:${seconds}`;
+        return (
+            <>
+                <RenderTime remainingTime={minutes} format={FORMATS.MINUTES} />:
+                <RenderTime remainingTime={seconds} format={FORMATS.SECONDS} />
+            </>
+        );
+    };
 
     return (
         <div className={styles.infoBlock}>
@@ -25,11 +35,11 @@ const InfoBlock = () => {
             <div className={styles.timer}>
                 <CountdownCircleTimer
                     isPlaying
-                    duration={7}
-                    colors={['#004777', '#F7B801', '#A30000', '#A30000']}
-                    colorsTime={[7, 5, 2, 0]}
+                    duration={90}
+                    colors={['#36DE00', '#FFFB00', '#F80000']}
+                    colorsTime={[30, 15, 0]}
                 >
-                    {({ remainingTime }) => remainingTime}
+                    {formatTime}
                 </CountdownCircleTimer>
             </div>
         </div>

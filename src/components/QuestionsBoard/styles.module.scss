@@ -1,3 +1,76 @@
-.questuionsBoard {
+@import 'assets/css/variables.scss';
+@import 'assets/css/mixins.scss';
+
+.questionsBoard {
+    position: relative;
+    box-shadow: $primary-shadow;
     background-color: white;
+    width: 100%;
+    padding: 0.5em 1.5em 1.5em;
+    border-radius: 1vw;
+
+    & > h2 {
+        margin-bottom: 0.5em;
+    }
+
+    .questions {
+        @include flex(row);
+        gap: 1em;
+        width: 100%;
+
+        .questionsColumn {
+            @include flex(column);
+            width: 25%;
+
+            text-align: center;
+
+            & > span {
+                @include font(1.5rem, 700);
+                margin-bottom: 0.875em;
+            }
+        }
+
+        .easyQuestionsColumn {
+            width: 50%;
+
+            & > span {
+                color: $green;
+            }
+
+            .easyQuestions {
+                @include flex(row, left, center);
+                flex-wrap: wrap;
+                gap: 1em;
+                width: 100%;
+
+                & > div {
+                    flex: 45%;
+                }
+            }
+        }
+
+        .mediumQuestionsColumn {
+            & > span {
+                color: $yellow;
+            }
+
+            .mediumQuestions {
+                @include flex(column);
+                gap: 1em;
+                width: 100%;
+            }
+        }
+
+        .hardQuestionsColumn {
+            & > span {
+                color: $red;
+            }
+
+            .hardQuestions {
+                @include flex(column);
+                gap: 1em;
+                width: 100%;
+            }
+        }
+    }
 }

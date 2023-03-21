@@ -12,3 +12,27 @@
 body {
     overscroll-behavior: none;
 }
+
+@media screen and (max-width: $desktop) {
+    html {
+        font-size: 1.25rem;
+    }
+}
+
+@media screen and (max-width: $laptop-large) {
+    html {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: $laptop) {
+    html {
+        font-size: 0.875rem;
+    }
+}
+
+@media screen and (max-width: $tablet) {
+    html {
+        font-size: 0.75rem;
+    }
+}

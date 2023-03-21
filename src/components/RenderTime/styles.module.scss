@@ -1,0 +1,30 @@
+@import 'assets/css/mixins.scss';
+
+.timeWrapper {
+    @include nunito(2rem);
+    position: relative;
+    width: 1.5em;
+    height: 1.25em;
+
+    .time {
+        @include flex(row, center, center);
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        transform: translateY(0);
+        opacity: 1;
+        transition: all 0.2s;
+
+        &.up {
+            opacity: 0;
+            transform: translateY(-100%);
+        }
+
+        &.down {
+            opacity: 0;
+            transform: translateY(100%);
+        }
+    }
+}

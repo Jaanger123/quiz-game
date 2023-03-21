@@ -107,6 +107,7 @@ export const useMainContext = () => useContext(MainContext);
 const INIT_STATE = {
     players: [],
     currentPlayer: null,
+    currentQuestion: null,
 };
 
 const reducer = (state = INIT_STATE, action) => {
@@ -115,6 +116,8 @@ const reducer = (state = INIT_STATE, action) => {
             return { ...state, players: action.payload };
         case MAIN_CONTEXT_ACTIONS.SET_PLAYER:
             return { ...state, currentPlayer: action.payload };
+        case MAIN_CONTEXT_ACTIONS.SET_QUESTION:
+            return { ...state, currentQuestion: action.payload };
 
         default:
             return state;
@@ -126,6 +129,7 @@ const MainContextProvider = ({ children }) => {
 
     useEffect(() => {
         getPlayers();
+        getPlayer();
     }, []);
 
     const getPlayers = () => {
@@ -164,11 +168,21 @@ const MainContextProvider = ({ children }) => {
         });
     };
 
+    const setQuestion = question => {
+        sessionStorage.setItem('question', JSON.stringify(question));
+
+        dispatch({
+            type: MAIN_CONTEXT_ACTIONS.SET_QUESTION,
+            payload: question,
+        });
+    };
+
     const values = {
         players: state.players,
         currentPlayer: state.currentPlayer,
-        getPlayer,
+        currentQuestion: state.currentQuestion,
         setPlayer,
+        setQuestion,
     };
 
     return <MainContext.Provider value={values}>{children}</MainContext.Provider>;

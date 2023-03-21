@@ -10,6 +10,7 @@
 
     h2 {
         margin-bottom: 0.75em;
+        white-space: nowrap;
     }
 
     .playerInfo {
@@ -19,6 +20,17 @@
 
         .playerPoints {
             font-size: 3rem;
+        }
+    }
+
+    .timer {
+        @include flex(row, center, center);
+        width: 70%;
+        margin: auto;
+
+        & > div {
+            @include flex(row, center);
+            width: 100% !important;
         }
     }
 }
