@@ -1,113 +1,12 @@
+import { useMainContext } from 'contexts/MainContextProvider';
 import QuestionCard from 'components/QuestionCard';
 import ShowQuestion from 'components/ShowQuestion';
+
 import styles from './styles.module.scss';
 
-const easyQuestions = [
-    {
-        difficulty: 'easy',
-        answerPoints: 100,
-        question: 'Что такое "Предпринимательское право"?',
-        answer: 'Это слишком сложный вопрос, я не знаю ответа ;(',
-    },
-    {
-        difficulty: 'easy',
-        answerPoints: 100,
-        question: 'Что такое "Предпринимательское право"?',
-        answer: 'Это слишком сложный вопрос, я не знаю ответа ;(',
-    },
-    {
-        difficulty: 'easy',
-        answerPoints: 100,
-        question: 'Что такое "Предпринимательское право"?',
-        answer: 'Это слишком сложный вопрос, я не знаю ответа ;(',
-    },
-    {
-        difficulty: 'easy',
-        answerPoints: 100,
-        question: 'Что такое "Предпринимательское право"?',
-        answer: 'Это слишком сложный вопрос, я не знаю ответа ;(',
-    },
-    {
-        difficulty: 'easy',
-        answerPoints: 100,
-        question: 'Что такое "Предпринимательское право"?',
-        answer: 'Это слишком сложный вопрос, я не знаю ответа ;(',
-    },
-    {
-        difficulty: 'easy',
-        answerPoints: 100,
-        question: 'Что такое "Предпринимательское право"?',
-        answer: 'Это слишком сложный вопрос, я не знаю ответа ;(',
-    },
-    {
-        difficulty: 'easy',
-        answerPoints: 100,
-        question: 'Что такое "Предпринимательское право"?',
-        answer: 'Это слишком сложный вопрос, я не знаю ответа ;(',
-    },
-    {
-        difficulty: 'easy',
-        answerPoints: 100,
-        question: 'Что такое "Предпринимательское право"?',
-        answer: 'Это слишком сложный вопрос, я не знаю ответа ;(',
-    },
-];
-
-const mediumQuestions = [
-    {
-        difficulty: 'medium',
-        answerPoints: 250,
-        question: 'Что такое "Предпринимательское право"?',
-        answer: 'Это слишком сложный вопрос, я не знаю ответа ;(',
-    },
-    {
-        difficulty: 'medium',
-        answerPoints: 250,
-        question: 'Что такое "Предпринимательское право"?',
-        answer: 'Это слишком сложный вопрос, я не знаю ответа ;(',
-    },
-    {
-        difficulty: 'medium',
-        answerPoints: 250,
-        question: 'Что такое "Предпринимательское право"?',
-        answer: 'Это слишком сложный вопрос, я не знаю ответа ;(',
-    },
-    {
-        difficulty: 'medium',
-        answerPoints: 250,
-        question: 'Что такое "Предпринимательское право"?',
-        answer: 'Это слишком сложный вопрос, я не знаю ответа ;(',
-    },
-];
-
-const hardQuestions = [
-    {
-        difficulty: 'hard',
-        answerPoints: 500,
-        question: 'Что такое "Предпринимательское право"?',
-        answer: 'Это слишком сложный вопрос, я не знаю ответа ;(',
-    },
-    {
-        difficulty: 'hard',
-        answerPoints: 500,
-        question: 'Что такое "Предпринимательское право"?',
-        answer: 'Это слишком сложный вопрос, я не знаю ответа ;(',
-    },
-    {
-        difficulty: 'hard',
-        answerPoints: 500,
-        question: 'Что такое "Предпринимательское право"?',
-        answer: 'Это слишком сложный вопрос, я не знаю ответа ;(',
-    },
-    {
-        difficulty: 'hard',
-        answerPoints: 500,
-        question: 'Что такое "Предпринимательское право"?',
-        answer: 'Это слишком сложный вопрос, я не знаю ответа ;(',
-    },
-];
-
 const QuestionsBoard = () => {
+    const { questions } = useMainContext();
+
     return (
         <div className={styles.questionsBoard}>
             <ShowQuestion />
@@ -118,7 +17,7 @@ const QuestionsBoard = () => {
                 >
                     <span>EASY</span>
                     <div className={styles.easyQuestions}>
-                        {easyQuestions.map((question, index) => (
+                        {questions?.easyQuestions.map((question, index) => (
                             <QuestionCard key={index} question={question} />
                         ))}
                     </div>
@@ -128,7 +27,7 @@ const QuestionsBoard = () => {
                 >
                     <span>MEDIUM</span>
                     <div className={styles.mediumQuestions}>
-                        {mediumQuestions.map((question, index) => (
+                        {questions?.mediumQuestions.map((question, index) => (
                             <QuestionCard key={index} question={question} />
                         ))}
                     </div>
@@ -138,7 +37,7 @@ const QuestionsBoard = () => {
                 >
                     <span>HARD</span>
                     <div className={styles.hardQuestions}>
-                        {hardQuestions.map((question, index) => (
+                        {questions?.hardQuestions.map((question, index) => (
                             <QuestionCard key={index} question={question} />
                         ))}
                     </div>

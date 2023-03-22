@@ -1,13 +1,14 @@
-import PlayerIcon from 'components/PlayerIcon';
 import { useMainContext } from 'contexts/MainContextProvider';
+import PlayerIcon from 'components/PlayerIcon';
 
 import styles from './styles.module.scss';
 
 const PlayerCard = ({ player }) => {
-    const { setPlayer } = useMainContext();
+    const { setPlayer, resetData } = useMainContext();
 
     const chooseCurrentPlayer = () => {
         setPlayer(player);
+        resetData();
     };
 
     return (

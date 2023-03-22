@@ -10,12 +10,12 @@
     .container {
         width: 90%;
         margin: auto;
-        padding-top: 1em;
+        padding-block: 0.75em;
 
         .infoBlockQuestionBoard {
-            @include flex(row, space-between);
+            @include flex(row, space-between, stretch);
             gap: 1em;
-            margin-top: 1em;
+            margin-block: 1em;
         }
     }
 }

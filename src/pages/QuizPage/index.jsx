@@ -1,3 +1,4 @@
+import ControlPanel from 'components/ControlPanel';
 import InfoBlock from 'components/InfoBlock';
 import PlayersListTopBar from 'components/PlayersListTopBar';
 import QuestionsBoard from 'components/QuestionsBoard';
@@ -14,6 +15,7 @@ const QuizPage = () => {
                     <InfoBlock />
                     <QuestionsBoard />
                 </div>
+                <ControlPanel />
             </div>
         </div>
     );

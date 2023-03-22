@@ -1,0 +1,11 @@
+@import 'assets/css/variables';
+@import 'assets/css/mixins';
+
+.controlPanel {
+    @include flex;
+    gap: 1em;
+    box-shadow: $primary-shadow;
+    background-color: white;
+    padding: 0.75em 1.5em;
+    border-radius: 1vw;
+}

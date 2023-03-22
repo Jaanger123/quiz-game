@@ -1,3 +1,4 @@
+@import 'assets/css/animations.scss';
 @import 'assets/css/variables.scss';
 @import 'assets/css/mixins.scss';
 
@@ -14,44 +15,86 @@
     border-radius: 1vw;
     transition-property: height, width;
     transition-duration: 0.5s;
-    // transition: height, width 0.5s;
 
     &.fullBoard {
         height: 100%;
         width: 100%;
-        // padding: 0.5em 1.5em 1.5em;
 
         .showQuestion {
             display: flex;
-            animation: show-question 1s;
+            animation: show-element 0.8s;
             animation-fill-mode: forwards;
         }
     }
 
     .showQuestion {
-        @include flex(column, space-between);
+        @include flex(column, flex-end, center);
         width: 100%;
         height: 100%;
+        padding: 0.5em 12% 2.5em;
         opacity: 0;
         display: none;
 
-        h2 {
+        p {
+            @include font(1.5rem);
+            display: none;
+            margin-bottom: 2em;
+            opacity: 0;
+
+            &.showParagraph {
+                display: inline-block;
+                animation: show-element 1s forwards;
+            }
         }
 
         .questionButtons {
-            @include flex(row, center);
-        }
-    }
-}
+            @include flex(row, center, center);
+            gap: 2em;
+            width: 100%;
+            height: 30%;
+            padding-top: 1.5em;
+            border-top: 0.125rem solid $purple;
 
-@keyframes show-question {
-    from {
-        opacity: 0;
-    }
-    90% {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
+            button {
+                display: none;
+                opacity: 0;
+
+                &.showButton {
+                    display: inline-block;
+                    animation: show-element 1s forwards;
+                }
+            }
+        }
+
+        .questionMarks {
+            position: absolute;
+            display: inline-block;
+            width: 3rem;
+            animation: floating 1s infinite alternate;
+
+            &#questionMarkOne {
+                left: 2em;
+                top: 3em;
+                animation-delay: 0s;
+            }
+
+            &#questionMarkTwo {
+                right: 3em;
+                top: 4em;
+                animation-delay: 0.15s;
+            }
+
+            &#questionMarkThree {
+                bottom: 4em;
+                left: 4em;
+                animation-delay: 0.35s;
+            }
+
+            &#questionMarkFour {
+                bottom: 3em;
+                right: 2em;
+                animation-delay: 0.5s;
+            }
+        }
     }
 }
