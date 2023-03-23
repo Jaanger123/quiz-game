@@ -4,101 +4,65 @@ import { questions } from 'utils/questions';
 
 const players = [
     {
+        playerIcon: require('assets/images/female_1.png'),
+        playerName: 'Алтынай',
+        playerPoints: 0,
+        gender: 'female',
+    },
+    {
         playerIcon: require('assets/images/male_1.png'),
-        playerName: 'Jaanger',
+        playerName: 'Макс',
         playerPoints: 0,
         gender: 'male',
     },
     {
-        playerIcon: require('assets/images/female_1.png'),
-        playerName: 'Ayana',
+        playerIcon: require('assets/images/female_2.png'),
+        playerName: 'Хадича',
         playerPoints: 0,
         gender: 'female',
+    },
+    {
+        playerIcon: require('assets/images/male_2.png'),
+        playerName: 'Нурдавлет',
+        playerPoints: 0,
+        gender: 'male',
+    },
+    {
+        playerIcon: require('assets/images/male_3.png'),
+        playerName: 'Байзат',
+        playerPoints: 0,
+        gender: 'male',
     },
     {
         playerIcon: require('assets/images/male_4.png'),
-        playerName: 'Yzak',
+        playerName: 'Дастан',
         playerPoints: 0,
         gender: 'male',
     },
-    {
-        playerIcon: require('assets/images/female_3.png'),
-        playerName: 'mina',
-        playerPoints: 0,
-        gender: 'female',
-    },
-    {
-        playerIcon: require('assets/images/male_1.png'),
-        playerName: 'Jaanger',
-        playerPoints: 0,
-        gender: 'male',
-    },
-    {
-        playerIcon: require('assets/images/female_1.png'),
-        playerName: 'Ayana',
-        playerPoints: 0,
-        gender: 'female',
-    },
-    {
-        playerIcon: require('assets/images/male_2.png'),
-        playerName: 'Rena',
-        playerPoints: 0,
-        gender: 'male',
-    },
-    {
-        playerIcon: require('assets/images/female_2.png'),
-        playerName: 'mina',
-        playerPoints: 0,
-        gender: 'female',
-    },
-    {
-        playerIcon: require('assets/images/male_1.png'),
-        playerName: 'Jaanger',
-        playerPoints: 0,
-        gender: 'male',
-    },
-    {
-        playerIcon: require('assets/images/female_1.png'),
-        playerName: 'Ayana',
-        playerPoints: 0,
-        gender: 'female',
-    },
-    {
-        playerIcon: require('assets/images/male_2.png'),
-        playerName: 'Rena',
-        playerPoints: 0,
-        gender: 'male',
-    },
-    {
-        playerIcon: require('assets/images/female_2.png'),
-        playerName: 'mina',
-        playerPoints: 0,
-        gender: 'female',
-    },
-    {
-        playerIcon: require('assets/images/male_1.png'),
-        playerName: 'Jaanger',
-        playerPoints: 0,
-        gender: 'male',
-    },
-    {
-        playerIcon: require('assets/images/female_1.png'),
-        playerName: 'Ayana',
-        playerPoints: 0,
-        gender: 'female',
-    },
-    {
-        playerIcon: require('assets/images/male_2.png'),
-        playerName: 'Rena',
-        playerPoints: 0,
-        gender: 'male',
-    },
-    {
-        playerIcon: require('assets/images/female_2.png'),
-        playerName: 'mina',
-        playerPoints: 0,
-        gender: 'female',
-    },
+    // {
+    //     playerIcon: require('assets/images/male_1.png'),
+    //     playerName: 'Исраил',
+    //     playerPoints: 0,
+    //     gender: 'male',
+    // },
+    // {
+    //     playerIcon: require('assets/images/male_2.png'),
+    //     playerName: 'Арген',
+    //     playerPoints: 0,
+    //     gender: 'male',
+    // },
+    // {
+    //     playerIcon: require('assets/images/male_3.png'),
+    //     playerName: 'Тима',
+    //     playerPoints: 0,
+    //     gender: 'male',
+    // },
+    // {
+    //     playerIcon: require('assets/images/female_4.png'),
+    //     playerName: 'Нурис',
+    //     playerPoints: 0,
+    //     gender: 'male',
+    // },
 ];
 
 export const MainContext = createContext();
@@ -110,8 +74,10 @@ const INIT_STATE = {
     questions: null,
     currentPlayer: null,
     currentQuestion: null,
+    winner: null,
     questionAnswered: false,
     isTimerPlaying: false,
+    showWinner: false,
     timerKey: 0,
 };
 
@@ -121,6 +87,8 @@ const reducer = (state = INIT_STATE, action) => {
             return { ...state, players: action.payload };
         case MAIN_CONTEXT_ACTIONS.SET_PLAYER:
             return { ...state, currentPlayer: action.payload };
+        case MAIN_CONTEXT_ACTIONS.SET_WINNER:
+            return { ...state, winner: action.payload };
         case MAIN_CONTEXT_ACTIONS.SET_QUESTIONS:
             return { ...state, questions: action.payload };
         case MAIN_CONTEXT_ACTIONS.SET_QUESTION:
@@ -135,6 +103,8 @@ const reducer = (state = INIT_STATE, action) => {
             return { ...state, timerKey: action.payload };
         case MAIN_CONTEXT_ACTIONS.SET_QUESTION_ANSWERED:
             return { ...state, questionAnswered: action.payload };
+        case MAIN_CONTEXT_ACTIONS.SET_SHOW_WINNER:
+            return { ...state, showWinner: action.payload };
 
         default:
             return state;
@@ -160,14 +130,15 @@ const MainContextProvider = ({ children }) => {
     };
 
     const getPlayers = () => {
-        const players = sessionStorage.getItem('players') || [];
+        // const players = sessionStorage.getItem('players') || [];
 
-        if (!players.length) {
-            sessionStorage.setItem('players', JSON.stringify(players));
-        }
+        // if (!players.length) {
+        sessionStorage.setItem('players', JSON.stringify(players));
+        // }
+
         dispatch({
             type: MAIN_CONTEXT_ACTIONS.SET_PLAYERS,
-            payload: JSON.parse(players),
+            payload: players,
         });
     };
 
@@ -209,7 +180,7 @@ const MainContextProvider = ({ children }) => {
     const getQuestions = () => {
         let questionsObj = sessionStorage.getItem('questions');
 
-        if (!questions) {
+        if (!questionsObj) {
             setQuestions(questions);
             questionsObj = sessionStorage.getItem('questions');
         }
@@ -309,7 +280,7 @@ const MainContextProvider = ({ children }) => {
         resetTimer();
     };
 
-    const getWinner = () => {
+    const getWinners = () => {
         const winners = [];
 
         for (let player of state.players) {
@@ -350,13 +321,24 @@ const MainContextProvider = ({ children }) => {
 
         setPlayers(players);
     };
-    console.log(getWinner());
+
+    const defineWinner = () => {
+        const winner = getWinners()[0];
+
+        dispatch({ type: MAIN_CONTEXT_ACTIONS.SET_WINNER, payload: winner });
+    };
+
+    const setShowWinner = show => {
+        dispatch({ type: MAIN_CONTEXT_ACTIONS.SET_SHOW_WINNER, payload: show });
+    };
 
     const values = {
         players: state.players,
         questions: state.questions,
         currentPlayer: state.currentPlayer,
         currentQuestion: state.currentQuestion,
+        winner: state.winner,
+        showWinner: state.showWinner,
         questionAnswered: state.questionAnswered,
         isTimerPlaying: state.isTimerPlaying,
         timerKey: state.timerKey,
@@ -369,10 +351,11 @@ const MainContextProvider = ({ children }) => {
         correctAnswer,
         incorrectAnswer,
         resetData,
-        getWinner,
         resetQuestions,
         resetPlayersPoints,
         removeCurrentPlayer,
+        defineWinner,
+        setShowWinner,
     };
 
     return <MainContext.Provider value={values}>{children}</MainContext.Provider>;

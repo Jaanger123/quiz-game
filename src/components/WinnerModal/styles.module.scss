@@ -1,0 +1,41 @@
+@import 'assets/css/variables.scss';
+@import 'assets/css/mixins.scss';
+
+.winnerModalBackground {
+    @include flex(row, center, center);
+    position: absolute;
+    z-index: 10;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+
+    .winnerModal {
+        @include flex(column, space-between, center);
+        @include player-name;
+        width: 30%;
+        box-shadow: $primary-shadow;
+        background-color: white;
+        padding: 1em;
+        border-radius: 1vw;
+        text-align: center;
+
+        span {
+            @include font(3rem, 500);
+        }
+
+        .close {
+            align-self: flex-end;
+            width: 1rem;
+            cursor: pointer;
+
+            &:hover {
+                transform: scale(0.9);
+            }
+        }
+
+        .trophey {
+            width: 6rem;
+            padding-top: 2em;
+        }
+    }
+}

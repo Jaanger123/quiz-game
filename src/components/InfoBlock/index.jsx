@@ -62,7 +62,7 @@ const InfoBlock = () => {
             <div className={styles.timer}>
                 <CountdownCircleTimer
                     isPlaying={isTimerPlaying}
-                    duration={5}
+                    duration={90}
                     colors={['#36DE00', '#FFFB00', '#F80000']}
                     colorsTime={[45, 20, 0]}
                     key={timerKey}
